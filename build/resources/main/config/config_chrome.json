@@ -1,0 +1,14 @@
+{
+  "appUrl": "https://blueautoregressionlatest.bluesoftware.com/",
+  "connectApiURL": "https://connectapiautomation.bluesoftware.com/",
+  "browser": "CHROME",
+  "gridEnabled": false,
+  "platform": "WINDOWS",
+  "hubUrl": "http://localhost:",
+  "enableKnownIssue":true,
+  "dbURL":"jdbc:jtds:sqlserver://10.225.176.19:1433/blueautoregressionlatest_oltp",
+  "fileDirectory": "/src/main/resources/data/localDirectory/",
+  "dbName": "blueautoregressionlatest_oltp",
+  "dbUser": "dev",
+  "dbPw": "dev"
+}
