@@ -15,11 +15,10 @@ if (!hasProperty('buildProfile')) ext.buildProfile = 'local'
 apply from: "profile-${buildProfile}.gradle"
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation 'org.testng:testng:7.4.0'
     implementation 'io.github.bonigarcia:webdrivermanager:4.4.3'
-    implementation 'com.codeborne:selenide:5.23.3'
+    implementation 'com.codeborne:selenide:5.24.3'
 
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'

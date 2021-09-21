@@ -54,20 +54,21 @@ public class BaseTest {
             testEnv.setFileDirectory(localFileDirectory);
         }
 //        TestConfigurationManager.ensureTestConfigurations(testEnv);
+        Configuration.browser="chrome";
         LOG.info("Config file initialization is finished.");
     }
 
     @AfterClass
     public static void writeAllureEnvFile() {
-        Properties allureEnv = new Properties();
-        allureEnv.setProperty("BLUE Site URL", testEnv.getAppUrl());
-        allureEnv.setProperty("Browser Name", prop.getProperty("browser.name"));
-        allureEnv.setProperty("Browser Version", prop.getProperty("browser.version"));
-        allureEnv.setProperty("OS Name", System.getProperty("os.name"));
-        allureEnv.setProperty("OS Version", System.getProperty("os.version"));
-        allureEnv.setProperty("BLUE (back) version", prop.getProperty(BLUEV_VERSION_PROP));
-        Utilities.writeToPropertyFile(allureEnv, Paths.get(prop.getProperty("allure.resultdir"), "environment" +
-                ".properties").toString(), false);
+//        Properties allureEnv = new Properties();
+//        allureEnv.setProperty("BLUE Site URL", testEnv.getAppUrl());
+//        allureEnv.setProperty("Browser Name", prop.getProperty("browser.name"));
+//        allureEnv.setProperty("Browser Version", prop.getProperty("browser.version"));
+//        allureEnv.setProperty("OS Name", System.getProperty("os.name"));
+//        allureEnv.setProperty("OS Version", System.getProperty("os.version"));
+//        allureEnv.setProperty("BLUE (back) version", prop.getProperty(BLUEV_VERSION_PROP));
+//        Utilities.writeToPropertyFile(allureEnv, Paths.get(prop.getProperty("allure.resultdir"), "environment" +
+//                ".properties").toString(), false);
     }
 
     @BeforeMethod
@@ -79,52 +80,24 @@ public class BaseTest {
      * Set up web driver environment.
      */
     private void setupWebDriver() throws Exception {
-        initializeWebDriver(testEnv);
-        WebDriver webDriver = WebDriverProvider.get();
-        webDriver.manage().deleteAllCookies();
-        LOG.info(String.format("Navigating to %s", testEnv.getAppUrl()));
-        if (prop.getProperty(BROWSER_NAME_PROP) == null || prop.getProperty(BROWSER_VERSION_PROP) == null) {
-            prop.setProperty(BROWSER_NAME_PROP, ((RemoteWebDriver) WebDriverProvider.get()).getCapabilities().getBrowserName());
-            prop.setProperty(BROWSER_VERSION_PROP, ((RemoteWebDriver) WebDriverProvider.get()).getCapabilities().getVersion());
-        }
+//        initializeWebDriver(testEnv);
+//        WebDriver webDriver = WebDriverProvider.get();
+//        webDriver.manage().deleteAllCookies();
+//        LOG.info(String.format("Navigating to %s", testEnv.getAppUrl()));
+//        if (prop.getProperty(BROWSER_NAME_PROP) == null || prop.getProperty(BROWSER_VERSION_PROP) == null) {
+//            prop.setProperty(BROWSER_NAME_PROP, ((RemoteWebDriver) WebDriverProvider.get()).getCapabilities().getBrowserName());
+//            prop.setProperty(BROWSER_VERSION_PROP, ((RemoteWebDriver) WebDriverProvider.get()).getCapabilities().getVersion());
+//        }
 
         prop.setProperty(BLUEV_VERSION_PROP, "1.0");
 //        System.setProperty("selenide.browser", "edge");
-//        Configuration.browser="edge";
+
         open("https://www.seleniumeasy.com/test/bootstrap-date-picker-demo.html");
         System.out.println();
     }
 
-    /**
-     * Initialize WebDriver and hold it as ThreadLocal variable.
-     *
-     * @param testEnv test parameters from testng.xml
-     */
-    private WebDriver initializeWebDriver(TestEnvModel testEnv) throws Exception {
-        DriverManager driverManager = getWebDriverManager(testEnv);
-        driverManager.init(testEnv);
-        WebDriver driver = driverManager.createDriver(testEnv, this.getClass().getName(), isHeadlessModeEnabled());
-        LOG.info("Initializing webdriver session --> Thread ID: " + Thread.currentThread().getId());
-        WebDriverProvider.setWebDriver(driver);
-        return driver;
-    }
 
-    /**
-     * Gets WebDriverManager depending on running mode.
-     *
-     * @param testEnv test parameters from testng.xml
-     * @return WebDriverManager
-     */
-    private DriverManager getWebDriverManager(TestEnvModel testEnv) {
-        if (testEnv.isGridEnabled()) {
-            return new RemoteDriverManager();
-        } else if (Browser.CHROME == testEnv.getBrowser()) {
-            return new ChromeDriverManager();
-        } else if (Browser.FIREFOX == testEnv.getBrowser()) {
-            return new FirefoxDriverManager();
-        }
-        throw new UnsupportedOperationException("Browser is not supported: " + testEnv.getBrowser());
-    }
+
 
     protected boolean isHeadlessModeEnabled() {
         return false;

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import webdriverprovider.WebDriverProvider;
 
 public class SeleniumTestListener implements ITestListener {
     private static final Logger LOG = LogManager.getLogger(SeleniumTestListener.class);
@@ -44,6 +43,6 @@ public class SeleniumTestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-        WebDriverProvider.destroyAndClear();
+//        WebDriverProvider.destroyAndClear();
     }
 }
